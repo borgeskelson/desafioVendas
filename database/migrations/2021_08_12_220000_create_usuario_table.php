@@ -17,6 +17,8 @@ class CreateUsuarioTable extends Migration
             $table->id();
             $table->string('nome');
             $table->string('email')->unique();
+            $table->boolean('excluido')->default(false);
+            $table->timestamps();
         });
     }
 
