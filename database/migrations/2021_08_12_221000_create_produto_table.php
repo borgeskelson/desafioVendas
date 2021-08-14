@@ -15,11 +15,9 @@ class CreateProdutoTable extends Migration
     {
         Schema::create('produto', function (Blueprint $table) {
             $table->id();
-            $table->string('codigo')->unique();
-            $table->string('nome');
+            $table->string('nome', 100);
             $table->decimal('preco', 6, 2)->default(0.00);
             $table->integer('quantidade')->default(0);
-            $table->boolean('excluido')->default(false);
             $table->timestamps();
         });
     }

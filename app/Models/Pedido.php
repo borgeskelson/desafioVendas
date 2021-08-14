@@ -2,13 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Pedido extends Model
 {
-    use HasFactory;
-
     protected $table = "pedido";
     protected $primaryKey = "id";
 
@@ -20,8 +17,7 @@ class Pedido extends Model
     protected $fillable = [
         'data',
         'id_usuario',
-        'valor',
-        'excluido'
+        'finalizado'
     ];
 
 }

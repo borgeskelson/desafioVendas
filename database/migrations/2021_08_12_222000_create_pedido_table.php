@@ -18,8 +18,7 @@ class CreatePedidoTable extends Migration
             $table->dateTime('data');
             $table->integer('id_usuario')->unsigned();
             $table->foreign('id_usuario')->references('id')->on('usuario');
-            $table->decimal('valor', 6, 2)->default(0.00);
-            $table->boolean('excluido')->default(false);
+            $table->boolean('finalizado')->default(false);
             $table->timestamps();
         });
     }

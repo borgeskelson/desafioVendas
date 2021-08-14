@@ -17,8 +17,7 @@ class DetalhePedido extends Pivot
         'id_pedido',
         'id_produto',
         'preco_produto',
-        'qtd_produto',
-        'excluido'
+        'qtd_produto'
     ];
 
 }

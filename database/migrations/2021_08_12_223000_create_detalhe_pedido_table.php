@@ -21,7 +21,6 @@ class CreateDetalhePedidoTable extends Migration
             $table->primary(array('id_pedido', 'id_produto'));
             $table->decimal('preco_produto', 6, 2)->default(0.00);
             $table->integer('qtd_produto')->default(0);
-            $table->boolean('excluido')->default(false);
             $table->timestamps();
         });
     }
