@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\ProdutoController;
 
@@ -15,9 +16,7 @@ use App\Http\Controllers\ProdutoController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/usuarios/novo', [UsuarioController::class, 'create']);
 Route::post('/usuarios/novo', [UsuarioController::class, 'store'])->name('incluir_usuario');
