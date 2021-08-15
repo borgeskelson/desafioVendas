@@ -56,7 +56,7 @@ class UsuarioController extends Controller
     public function indexPedidos($id)
     {
         //Lista todos os pedidos do usuário (abertos e finalizados)
-        $usuario = Usuario::with('pedidos')
+        $usuario = Usuario::with('pedidos', 'pedidos.detalhesPedido')
             ->orderBy('created_at', 'asc')
             ->get()
             ->find($id);

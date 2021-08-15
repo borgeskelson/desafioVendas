@@ -88,7 +88,11 @@ class PedidoController extends Controller
      */
     public function show($id)
     {
-        //
+        $pedido = Pedido::findOrFail($id);
+        $usuario = Pedido::with('usuario')->get()->find($pedido->id_usuario);
+        $detalhesPedido = DetalhePedido::where('id_pedido', $pedido->id)->get();
+
+        return view('usuarios.pedido.show', compact('pedido', 'usuario', 'detalhesPedido'));
     }
 
     /**
@@ -115,20 +119,27 @@ class PedidoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        foreach($request->detalhesPedido as $key => $id_detalhe_pedido) {
-            $detalhePedido = DetalhePedido::findOrFail($id_detalhe_pedido);
-            $detalhePedido->qtd_produto = $request->qtd_produto[$key];
-            $detalhePedido->save();
-
-            $produto = Produto::findOrFail($detalhePedido->id_produto);
-            $produto->quantidade = ($produto->quantidade - $detalhePedido->qtd_produto);
-            $produto->save();
+        if($request->has('_token')) {
+            foreach($request->detalhesPedido as $key => $id_detalhe_pedido) {
+                $detalhePedido = DetalhePedido::findOrFail($id_detalhe_pedido);
+                $detalhePedido->qtd_produto = $request->qtd_produto[$key];
+                $detalhePedido->save();
+            }
         }
 
         $pedido = Pedido::findOrFail($id);
         $pedido->update(['finalizado' => true]);
 
-        //return redirect('/usuarios/{id}/pedidos')->with('success', 'Pedido finalizado!');
+        $detalhesPedido = DetalhePedido::where('id_pedido', $pedido->id)->get();
+        foreach($detalhesPedido as $detalhePedido) {
+            $produto = Produto::findOrFail($detalhePedido->id_produto);
+            $produto->quantidade = ($produto->quantidade - $detalhePedido->qtd_produto);
+            $produto->save();
+        }
+
+        return redirect()->action(
+            [UsuarioController::class, 'indexPedidos'], ['id' => $pedido->id_usuario]
+        );
     }
 
     /**

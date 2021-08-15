@@ -6,7 +6,7 @@
 
     @include('includes.messages')
 
-    <form action="{{ route('pedidos.finish', $pedido->id) }}" method="POST">
+    <form action="{{ route('pedidos.checkout', $pedido->id) }}" method="POST">
     @csrf
         <table class="table mt-3" style="width: 70%">
             <thead>
@@ -45,7 +45,10 @@
             </tbody>
         </table>
         <div class="text-left mt-5" style="width: 70%">
-            <p style="font-weight: bold;">Total (R$): {{ $total }}</p>
+            <p style="font-weight: bold;">
+                <label>Total (R$):</label>
+                <input type="number" id="total_pedido" name="total_pedido" value="{{ $total }}" disabled>
+            </p>
             <button type="submit" class="btn btn-sm btn-primary">Finalizar</button>
             <a class="btn btn-sm btn-secondary" href="{{ url()->previous() }}">Voltar</a>
         </div>
@@ -54,6 +57,13 @@
 <script>
     function alteraSubtotal(id, preco, qtd) {
         document.getElementById(id).value = preco * qtd;
+
+        var total = 0;
+        var inputs = document.querySelectorAll('input[name^="st_"]');
+        [].forEach.call(inputs, function(input) {
+            total = total + parseFloat(input.value);
+        });
+        document.getElementById('total_pedido').value = total;
     }
 </script>
 

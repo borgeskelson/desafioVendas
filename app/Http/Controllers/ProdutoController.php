@@ -3,10 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Usuario;
 use App\Models\Produto;
 
 class ProdutoController extends Controller
 {
+    public function index($id=1) {
+        $usuario = Usuario::findOrFail($id);
+        $produtos = Produto::orderByRaw("(quantidade > 0) DESC, nome ASC")->get();
+        
+        return view('home', [
+            'usuario' => $usuario,
+            'produtos' => $produtos
+        ]);
+    }
+
     public function create() {
         return view('produtos.create');
     }

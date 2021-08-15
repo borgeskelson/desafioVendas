@@ -21,14 +21,18 @@
             <tr>
                 <td>#{{ $pedido->id }}</td>
                 <td>{{ $pedido->updated_at }}</td>
-                <td>0.00</td>
+                @php ($total = 0)
+                @foreach ($pedido->detalhesPedido as $detalhePedido)
+                    @php ($total = $total + ($detalhePedido->preco_produto * $detalhePedido->qtd_produto))
+                @endforeach
+                <td>{{ $total }}</td>
                 <td>{{ ($pedido->finalizado) ? 'Finalizado' : 'Em aberto' }}</td>
                 <td>
-                    @if (!$pedido->finalizado)
-                        <a href="/pedidos/{{ $pedido->id }}/checkout" class="btn btn-sm btn-success">Checkout</a>
-                        <a href="" class="btn btn-sm btn-primary">Finalizar</a>
+                    @if ($pedido->finalizado)
+                        <a href="/pedidos/{{ $pedido->id }}/show" class="btn btn-sm btn-info">Visualizar</a>
                     @else
-                        <a href="" class="btn btn-sm btn-info">Visualizar</a>
+                        <a href="/pedidos/{{ $pedido->id }}/checkout" class="btn btn-sm btn-success">Checkout</a>
+                        <a href="/pedidos/{{ $pedido->id }}/finish" class="btn btn-sm btn-primary">Finalizar</a>
                     @endif
                 </td>
             </tr>

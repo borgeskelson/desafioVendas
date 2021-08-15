@@ -1,10 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\ProdutoController;
+use App\Http\Controllers\PedidoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,11 +19,13 @@ use App\Http\Controllers\ProdutoController;
 Route::get('/', function () {
     return redirect('/home');
 });
-Route::get('/home', [HomeController::class, 'index']);
+Route::get('/home', [ProdutoController::class, 'index']);
 Route::get('/usuarios/{id}/pedidos', [UsuarioController::class, 'indexPedidos']);
 Route::post('/pedidos/store', [PedidoController::class, 'store'])->name('pedidos.store');
+Route::get('/pedidos/{id}/show', [PedidoController::class, 'show']);
 Route::get('/pedidos/{id}/checkout', [PedidoController::class, 'edit']);
-Route::post('/pedidos/{id}/checkout', [PedidoController::class, 'update'])->name('pedidos.finish');
+Route::post('/pedidos/{id}/checkout', [PedidoController::class, 'update'])->name('pedidos.checkout');
+Route::get('/pedidos/{id}/finish', [PedidoController::class, 'update']);
 
 Route::get('/usuarios/novo', [UsuarioController::class, 'create']);
 Route::post('/usuarios/novo', [UsuarioController::class, 'store'])->name('incluir_usuario');
