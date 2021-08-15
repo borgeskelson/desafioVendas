@@ -3,19 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Usuario;
 use App\Models\Produto;
+use Session;
 
 class ProdutoController extends Controller
 {
-    public function index($id=1) {
-        $usuario = Usuario::findOrFail($id);
-        $produtos = Produto::orderByRaw("(quantidade > 0) DESC, nome ASC")->get();
+    public function index() {
+        if (Session::has('usuario')) {
+            $usuario = Session::get('usuario');
+            $produtos = Produto::orderByRaw("(quantidade > 0) DESC, nome ASC")->get();
+            
+            return view('home', [
+                'usuario' => $usuario,
+                'produtos' => $produtos
+            ]);
+        }
         
-        return view('home', [
-            'usuario' => $usuario,
-            'produtos' => $produtos
-        ]);
+        return redirect('/login')->with('error', 'Nenhum usuário definido na sessão!');
     }
 
     public function create() {

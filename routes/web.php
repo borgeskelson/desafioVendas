@@ -17,8 +17,18 @@ use App\Http\Controllers\PedidoController;
 */
 
 Route::get('/', function () {
-    return redirect('/home');
+    return redirect('/login');
 });
+
+Route::get('/login', [UsuarioController::class, 'loginList']);
+Route::post('/login', [UsuarioController::class, 'doLogin'])->name('usuarios.login');;
+Route::get('/logout', function() {
+    Session::forget('usuario');
+    if(!Session::has('usuario')) {
+        return redirect('/login');
+    }
+});
+
 Route::get('/home', [ProdutoController::class, 'index']);
 Route::get('/usuarios/{id}/pedidos', [UsuarioController::class, 'indexPedidos']);
 Route::post('/pedidos/store', [PedidoController::class, 'store'])->name('pedidos.store');
@@ -27,7 +37,7 @@ Route::get('/pedidos/{id}/checkout', [PedidoController::class, 'edit']);
 Route::post('/pedidos/{id}/checkout', [PedidoController::class, 'update'])->name('pedidos.checkout');
 Route::get('/pedidos/{id}/finish', [PedidoController::class, 'update']);
 
-Route::resources([
+/*Route::resources([
     'usuarios' => UsuarioController::class,
     'produtos' => ProdutoController::class
-]);
+]);*/

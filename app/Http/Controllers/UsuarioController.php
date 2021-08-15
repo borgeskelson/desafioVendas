@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Usuario;
+use Session;
 
 class UsuarioController extends Controller
 {
@@ -53,8 +54,7 @@ class UsuarioController extends Controller
         return "Usuário excluído com sucesso!";
     }
 
-    public function indexPedidos($id)
-    {
+    public function indexPedidos($id) {
         //Lista todos os pedidos do usuário (abertos e finalizados)
         $usuario = Usuario::with('pedidos', 'pedidos.detalhesPedido')
             ->orderBy('created_at', 'asc')
@@ -62,5 +62,21 @@ class UsuarioController extends Controller
             ->find($id);
         
         return view('usuarios.pedido.index', compact('usuario'));
+    }
+
+    public function loginList() {
+        $usuarios = Usuario::orderBy('nome', 'asc')->get();
+        return view('login', compact('usuarios'));
+    }
+
+    public function doLogin(Request $request) {
+        if($request->has('_token')) {
+            $usuario = Usuario::findOrFail($request->id_usuario);
+            Session::put('usuario', $usuario);
+
+            return redirect()->action(
+                [ProdutoController::class, 'index']
+            );
+        }
     }
 }
