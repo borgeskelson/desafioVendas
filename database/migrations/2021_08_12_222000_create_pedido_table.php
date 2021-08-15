@@ -15,7 +15,6 @@ class CreatePedidoTable extends Migration
     {
         Schema::create('pedido', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('data');
             $table->integer('id_usuario')->unsigned();
             $table->foreign('id_usuario')->references('id')->on('usuario');
             $table->boolean('finalizado')->default(false);

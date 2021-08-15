@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\ProdutoController;
 
@@ -16,7 +17,11 @@ use App\Http\Controllers\ProdutoController;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', function () {
+    return redirect('/home');
+});
+Route::get('/home', [HomeController::class, 'index']);
+Route::post('/pedidos/store', [PedidoController::class, 'store'])->name('pedidos.store');
 
 Route::get('/usuarios/novo', [UsuarioController::class, 'create']);
 Route::post('/usuarios/novo', [UsuarioController::class, 'store'])->name('incluir_usuario');

@@ -20,4 +20,7 @@ class Usuario extends Model
         'cpf'
     ];
 
+    public function pedidos() {
+        return $this->hasMany('App\Models\Pedido');
+    }
 }

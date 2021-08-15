@@ -15,9 +15,11 @@ class Pedido extends Model
      * @var array
      */
     protected $fillable = [
-        'data',
         'id_usuario',
         'finalizado'
     ];
 
+    public function usuario() {
+        return $this->belongsTo('App\Models\Usuario');
+    }
 }
