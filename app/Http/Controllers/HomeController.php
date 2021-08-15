@@ -10,7 +10,7 @@ class HomeController extends Controller
 {
     public function index($id=1) {
         $usuario = Usuario::findOrFail($id);
-        $produtos = Produto::all();
+        $produtos = Produto::orderBy('nome', 'asc')->get();
         
         return view('home', [
             'usuario' => $usuario,

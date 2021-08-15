@@ -4,7 +4,7 @@
 <div class="container my-4">
     <h2 class="display-5" style="padding-bottom: 20px;">Bem-vindo, {{ $usuario->nome}}!</h2>
     
-    @include('messages')
+    @include('includes.messages')
     
     <div class="row">
         @foreach ($produtos as $produto)

@@ -21,6 +21,6 @@ class Usuario extends Model
     ];
 
     public function pedidos() {
-        return $this->hasMany('App\Models\Pedido');
+        return $this->hasMany(Pedido::class, 'id_usuario', 'id');
     }
 }

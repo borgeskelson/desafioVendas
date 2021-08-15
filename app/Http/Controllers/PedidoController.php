@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Pedido;
 use App\Models\DetalhePedido;
+use App\Models\Produto;
 
 class PedidoController extends Controller
 {
@@ -16,7 +17,7 @@ class PedidoController extends Controller
      */
     public function index()
     {
-        //Listar todos os pedidos do usuário (abertos e finalizados)
+        //
     }
 
     /**
@@ -98,7 +99,11 @@ class PedidoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pedido = Pedido::findOrFail($id);
+        $usuario = Pedido::with('usuario')->get()->find($pedido->id_usuario);
+        $detalhesPedido = DetalhePedido::where('id_pedido', $pedido->id)->get();
+
+        return view('usuarios.pedido.edit', compact('pedido', 'usuario', 'detalhesPedido'));
     }
 
     /**
@@ -110,7 +115,20 @@ class PedidoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        foreach($request->detalhesPedido as $key => $id_detalhe_pedido) {
+            $detalhePedido = DetalhePedido::findOrFail($id_detalhe_pedido);
+            $detalhePedido->qtd_produto = $request->qtd_produto[$key];
+            $detalhePedido->save();
+
+            $produto = Produto::findOrFail($detalhePedido->id_produto);
+            $produto->quantidade = ($produto->quantidade - $detalhePedido->qtd_produto);
+            $produto->save();
+        }
+
+        $pedido = Pedido::findOrFail($id);
+        $pedido->update(['finalizado' => true]);
+
+        //return redirect('/usuarios/{id}/pedidos')->with('success', 'Pedido finalizado!');
     }
 
     /**

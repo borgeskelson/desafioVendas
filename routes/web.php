@@ -21,7 +21,10 @@ Route::get('/', function () {
     return redirect('/home');
 });
 Route::get('/home', [HomeController::class, 'index']);
+Route::get('/usuarios/{id}/pedidos', [UsuarioController::class, 'indexPedidos']);
 Route::post('/pedidos/store', [PedidoController::class, 'store'])->name('pedidos.store');
+Route::get('/pedidos/{id}/checkout', [PedidoController::class, 'edit']);
+Route::post('/pedidos/{id}/checkout', [PedidoController::class, 'update'])->name('pedidos.finish');
 
 Route::get('/usuarios/novo', [UsuarioController::class, 'create']);
 Route::post('/usuarios/novo', [UsuarioController::class, 'store'])->name('incluir_usuario');

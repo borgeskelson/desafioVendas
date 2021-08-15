@@ -52,4 +52,15 @@ class UsuarioController extends Controller
 
         return "Usuário excluído com sucesso!";
     }
+
+    public function indexPedidos($id)
+    {
+        //Lista todos os pedidos do usuário (abertos e finalizados)
+        $usuario = Usuario::with('pedidos')
+            ->orderBy('created_at', 'asc')
+            ->get()
+            ->find($id);
+        
+        return view('usuarios.pedido.index', compact('usuario'));
+    }
 }

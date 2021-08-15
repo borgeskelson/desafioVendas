@@ -22,10 +22,10 @@ class DetalhePedido extends Model
     ];
     
     public function pedido() {
-        return $this->belongsTo('App\Models\Pedido');
+        return $this->belongsTo(Pedido::class, 'id_pedido', 'id');
     }
 
     public function produto() {
-        return $this->belongsTo('App\Models\Produto');
+        return $this->belongsTo(Produto::class, 'id_produto', 'id');
     }
 }
