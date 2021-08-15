@@ -27,18 +27,7 @@ Route::get('/pedidos/{id}/checkout', [PedidoController::class, 'edit']);
 Route::post('/pedidos/{id}/checkout', [PedidoController::class, 'update'])->name('pedidos.checkout');
 Route::get('/pedidos/{id}/finish', [PedidoController::class, 'update']);
 
-Route::get('/usuarios/novo', [UsuarioController::class, 'create']);
-Route::post('/usuarios/novo', [UsuarioController::class, 'store'])->name('incluir_usuario');
-Route::get('/usuarios/{id}', [UsuarioController::class, 'show']);
-Route::get('/usuarios/editar/{id}', [UsuarioController::class, 'edit']);
-Route::post('/usuarios/editar/{id}', [UsuarioController::class, 'update'])->name('atualizar_usuario');
-Route::get('/usuarios/excluir/{id}', [UsuarioController::class, 'delete']);
-Route::post('/usuarios/excluir/{id}', [UsuarioController::class, 'destroy'])->name('remover_usuario');
-
-Route::get('/produtos/novo', [ProdutoController::class, 'create']);
-Route::post('/produtos/novo', [ProdutoController::class, 'store'])->name('incluir_produto');
-Route::get('/produtos/{id}', [ProdutoController::class, 'show']);
-Route::get('/produtos/editar/{id}', [ProdutoController::class, 'edit']);
-Route::post('/produtos/editar/{id}', [ProdutoController::class, 'update'])->name('atualizar_produto');
-Route::get('/produtos/excluir/{id}', [ProdutoController::class, 'delete']);
-Route::post('/produtos/excluir/{id}', [ProdutoController::class, 'destroy'])->name('remover_produto');
+Route::resources([
+    'usuarios' => UsuarioController::class,
+    'produtos' => ProdutoController::class
+]);
