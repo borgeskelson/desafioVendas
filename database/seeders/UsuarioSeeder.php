@@ -16,19 +16,19 @@ class UsuarioSeeder extends Seeder
     {
         $usuarios = [
             [
-                'nome' => 'Usuario 01',
-                'email' => 'usuario01@teste.com',
-                'cpf' => '00100100101'
+                'nome' => 'Fulano',
+                'email' => 'fulano@vendas.com',
+                'cpf' => '11122233300'
             ],
             [
-                'nome' => 'Usuario 02',
-                'email' => 'usuario02@teste.com',
-                'cpf' => '00200200202'
+                'nome' => 'Beltrano',
+                'email' => 'beltrano@vendas.com',
+                'cpf' => '44455566600'
             ],
             [
-                'nome' => 'Usuario 03',
-                'email' => 'usuario03@teste.com',
-                'cpf' => '00300300303'
+                'nome' => 'Sicrano',
+                'email' => 'sicrano@vendas.com',
+                'cpf' => '77788899900'
             ]
         ];
 
