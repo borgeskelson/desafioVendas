@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Pedido;
 use App\Models\DetalhePedido;
 use App\Models\Produto;
+use Session;
 
 class PedidoController extends Controller
 {
@@ -89,7 +90,7 @@ class PedidoController extends Controller
     public function show($id)
     {
         $pedido = Pedido::findOrFail($id);
-        $usuario = Pedido::with('usuario')->get()->find($pedido->id_usuario);
+        $usuario = Session::get('usuario');
         $detalhesPedido = DetalhePedido::where('id_pedido', $pedido->id)->get();
 
         return view('usuarios.pedido.show', compact('pedido', 'usuario', 'detalhesPedido'));
@@ -104,7 +105,7 @@ class PedidoController extends Controller
     public function edit($id)
     {
         $pedido = Pedido::findOrFail($id);
-        $usuario = Pedido::with('usuario')->get()->find($pedido->id_usuario);
+        $usuario = Session::get('usuario');
         $detalhesPedido = DetalhePedido::where('id_pedido', $pedido->id)->get();
 
         return view('usuarios.pedido.edit', compact('pedido', 'usuario', 'detalhesPedido'));

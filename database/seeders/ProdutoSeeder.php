@@ -16,19 +16,40 @@ class ProdutoSeeder extends Seeder
     {
         $produtos = [
             [
-                'nome' => 'Produto 01',
-                'preco' => 10.00,
-                'quantidade' => 50
+                'nome' => 'Biscoito Laminado Ninfa - 370g',
+                'preco' => 5.00,
+                'quantidade' => 5,
+                'url_imagem' => 'biscoito-laminado-ninfa.png'
             ],
             [
-                'nome' => 'Produto 02',
-                'preco' => 50.00,
-                'quantidade' => 10
+                'nome' => 'Álcool 70% Guimarães - 1L',
+                'preco' => 8.90,
+                'quantidade' => 10,
+                'url_imagem' => 'alcool-70-guimaraes.png'
             ],
             [
-                'nome' => 'Produto 03',
-                'preco' => 100.00,
-                'quantidade' => 5
+                'nome' => 'Queijo Minas Meia Cura Scala - 500g',
+                'preco' => 56.00,
+                'quantidade' => 15,
+                'url_imagem' => 'queijo-minas-meia-cura-skala.png'
+            ],
+            [
+                'nome' => 'Lava Roupas Tixan Ypê - 1L',
+                'preco' => 12.00,
+                'quantidade' => 20,
+                'url_imagem' => 'lava-roupas-tixan-ype.png'
+            ],
+            [
+                'nome' => 'Feijão Carioca Kicaldo - 1kg',
+                'preco' => 6.50,
+                'quantidade' => 25,
+                'url_imagem' => 'feijao-carioca-kicaldo.png'
+            ],
+            [
+                'nome' => 'Cenoura (kg)',
+                'preco' => 3.80,
+                'quantidade' => 30,
+                'url_imagem' => 'cenoura-granel.png'
             ]
         ];
 
@@ -36,7 +57,8 @@ class ProdutoSeeder extends Seeder
             Produto::create(array(
                 'nome' => $produto['nome'],
                 'preco' => $produto['preco'],
-                'quantidade' => $produto['quantidade']
+                'quantidade' => $produto['quantidade'],
+                'url_imagem' => $produto['url_imagem']
             ));
         }
     }

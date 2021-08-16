@@ -37,7 +37,7 @@ Route::get('/pedidos/{id}/checkout', [PedidoController::class, 'edit']);
 Route::post('/pedidos/{id}/checkout', [PedidoController::class, 'update'])->name('pedidos.checkout');
 Route::get('/pedidos/{id}/finish', [PedidoController::class, 'update']);
 
-/*Route::resources([
+Route::resources([
     'usuarios' => UsuarioController::class,
     'produtos' => ProdutoController::class
-]);*/
+]);

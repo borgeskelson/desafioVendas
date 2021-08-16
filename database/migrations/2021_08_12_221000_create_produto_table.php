@@ -18,6 +18,7 @@ class CreateProdutoTable extends Migration
             $table->string('nome', 100);
             $table->decimal('preco', 6, 2)->default(0.00);
             $table->integer('quantidade')->default(0);
+            $table->string('url_imagem', 150);
             $table->timestamps();
         });
     }

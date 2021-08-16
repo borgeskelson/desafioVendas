@@ -469,7 +469,7 @@ mark,
 }
 
 .img-fluid {
-  max-width: 100%;
+  max-width: 80%;
   height: auto;
 }
 
@@ -4442,7 +4442,7 @@ input[type=button].btn-block {
 .card-img-top,
 .card-img-bottom {
   flex-shrink: 0;
-  width: 100%;
+  width: 70%;
 }
 
 .card-img,

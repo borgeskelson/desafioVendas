@@ -10,7 +10,9 @@
         @foreach ($produtos as $produto)
         <div class="col-sm-4">
             <div class="card mb-3">
-                <div style="background-image:url('{{ $produto->imagem }}');height:300px;background-size:cover;" class="img-fluid"></div>
+                <div style="display: flex;align-items: center;height: 250px;vertical-align: middle;">
+                    <img class="card-img-top mx-auto img-fluid card-image" src="images/{{ $produto->url_imagem }}">
+                </div>
                 <div class="card-body">
                     <h5 class="card-title">{{ $produto->nome }}</h5>
                     <small class="text-muted">R$ {{ $produto->preco }}</small>
